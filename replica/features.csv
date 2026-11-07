@@ -1,0 +1,64 @@
+feature,area,priority,original,clone,notes
+Onboarding: pick course and reason,onboarding,must,yes,no,S02
+Daily goal selection,onboarding,must,yes,no,S03
+Placement test,onboarding,should,yes,no,S05 F03; cannot be undone in original
+Guest mode then sign-up after first lesson,onboarding,must,yes,no,S07 F01
+Google sign-in and email auth,account,must,yes,no,S07
+Learning path with sections and units,learn,must,yes,no,S08
+Path node types (lesson story review chest unit test),learn,must,yes,no,S08 S10
+Unit guidebook,learn,should,yes,no,S09
+Lesson player shell (progress bar check continue quit),lesson,must,yes,no,S11
+Exercise: translate (type),lesson,must,yes,no,typo tolerance
+Exercise: word bank arrange,lesson,must,yes,no,distractor words
+Exercise: tap what you hear,lesson,must,yes,no,slow audio button
+Exercise: match pairs,lesson,must,yes,no,
+Exercise: select image / multiple choice,lesson,must,yes,no,
+Exercise: speak (speech recognition),lesson,should,yes,no,"can't speak now" toggle
+Exercise: fill in blank / dialogue,lesson,should,yes,no,
+Answer feedback sheet,lesson,must,yes,no,S12
+Explain my answer (AI),lesson,should,yes,no,free in WYADA EN
+Report a wrong answer,lesson,could,yes,no,
+Lesson complete rewards (XP accuracy combo),rewards,must,yes,no,S13
+XP and daily goal ring,rewards,must,yes,no,
+Streak with calendar,retention,must,yes,no,S14 timezone-safe
+Streak freeze (max 2 equipped),retention,must,yes,no,F07
+Streak repair,retention,could,yes,no,
+Streak milestones,retention,should,yes,no,
+Push reminders,retention,must,yes,no,S06 S28
+Home screen streak widget,retention,could,yes,no,S28
+Energy system (free tier),economy,must,yes,no,numbers in config
+Out-of-energy gate with refill options,economy,must,yes,no,S15 F05
+Gems currency,economy,must,yes,no,
+Shop (refill freeze boosts),economy,should,yes,no,S18
+Weekly leagues (10 tiers),social,should,yes,no,S16 F06
+Daily quests,social,should,yes,no,S17
+Friends quests,social,could,yes,no,F08
+Monthly challenge badge,social,could,yes,no,
+Follow friends and find contacts,social,should,yes,no,S20
+Profile and stats,social,must,yes,no,S19
+Achievements,social,could,yes,no,S21
+Avatar builder,social,could,yes,no,own art
+Practice hub,practice,should,yes,no,S22
+Mistakes review,practice,should,yes,no,Plus; F09
+Words list with spaced repetition,practice,should,yes,no,
+Stories (interactive dialogues),practice,should,yes,no,S23 own content
+Audio radio lessons,practice,could,yes,no,
+Legendary levels,learn,could,yes,no,F13
+Plus: unlimited energy,premium,must,yes,no,maps to Super
+Plus: no ads,premium,should,yes,no,
+Plus: family plan,premium,could,yes,no,
+Max: AI roleplay,premium,should,yes,no,S26 F11
+Max: AI video call with character,premium,could,yes,no,S25 F10; realtime voice
+Max: AI speaking feedback,premium,could,yes,no,
+Paywall and plan comparison,premium,must,yes,no,S24 F12
+Google Play Billing subscriptions with trial,premium,must,yes,no,restore purchase
+Ads for free tier,economy,could,yes,no,optional
+Offline lessons and sync,platform,should,yes,no,
+Settings (sound haptics notifications goal),platform,must,yes,no,S27
+Arabic and French UI with RTL,platform,must,no,no,WYADA EN addition
+Duolingo brand / owl / characters,brand,skip,yes,no,trademark: design own
+Duolingo course content and audio,content,skip,yes,no,owned: write own English course
+Duolingo user base and friend graph,network,skip,yes,no,network effect
+Duolingo trained learning models,data,skip,yes,no,use simple SRS
+Duolingo English Test,credential,skip,yes,no,regulated credential
+Math Music Chess courses,content,skip,yes,no,outside slice
