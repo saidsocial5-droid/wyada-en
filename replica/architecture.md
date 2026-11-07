@@ -8,8 +8,8 @@ Product: a gamified English course for **Arabic and French speakers**. Android f
 
 | layer | choice | why |
 | --- | --- | --- |
-| mobile app | **Expo (React Native) + TypeScript**, Expo Router | one codebase for Android now and iOS/web later; OTA updates; RTL support through `I18nManager` |
-| styling | NativeWind (Tailwind for RN), tokens from `/replica-design` | same token file for app and web |
+| mobile app | **Expo SDK 58 (React Native 0.88) + TypeScript**, Expo Router, app in `app/` | one codebase for Android now and iOS/web later; OTA updates; RTL support through `I18nManager` |
+| styling | typed theme generated from `replica/design/tokens.json` (`app/src/theme`); `tailwind.preset.cjs` is generated too, so NativeWind can be added once it's verified on Expo SDK 58 | no Babel/Metro plugin risk on a brand-new SDK |
 | state / data | TanStack Query + Zustand; MMKV for offline cache | lessons must survive bad networks |
 | i18n | i18next + `expo-localization`; ar / fr / en | RTL flips layout automatically when `ar` |
 | backend | **Supabase**: Postgres, Auth, Storage, Edge Functions (Deno), pg_cron | one managed service, Row Level Security, cheap at zero users |
