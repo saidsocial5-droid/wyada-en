@@ -1,0 +1,79 @@
+{
+  "slug": "en-from-ar",
+  "from_language": "ar",
+  "title": "الإنجليزية للناطقين بالعربية",
+  "sections": [
+    {
+      "title": "البداية",
+      "cefr": "A1",
+      "units": [
+        {
+          "title": "ألقِ التحية وعرّف بنفسك",
+          "guidebook": [
+            { "phrase": "Hello!", "translation": "مرحباً!" },
+            { "phrase": "My name is Sara.", "translation": "اسمي سارة." },
+            { "phrase": "How are you?", "translation": "كيف حالك؟" },
+            { "phrase": "Nice to meet you.", "translation": "تشرّفت بمعرفتك." }
+          ],
+          "nodes": [
+            {
+              "kind": "lesson",
+              "exercises": [
+                { "kind": "multiple_choice", "prompt": { "source": "مرحباً" }, "options": ["Hello", "Thank you", "Goodbye"], "solutions": ["Hello"] },
+                { "kind": "multiple_choice", "prompt": { "source": "شكراً" }, "options": ["Yes", "Thank you", "Hello"], "solutions": ["Thank you"] },
+                { "kind": "word_bank", "prompt": { "source": "مرحباً، شكراً" }, "tokens": ["Hello", "thank", "you", "goodbye", "yes"], "solutions": ["Hello thank you"] },
+                { "kind": "multiple_choice", "prompt": { "source": "مع السلامة" }, "options": ["Goodbye", "No", "Hello"], "solutions": ["Goodbye"] },
+                { "kind": "translate_to_en", "prompt": { "source": "نعم، شكراً" }, "solutions": ["Yes thank you", "Yes thanks"] },
+                { "kind": "translate_to_en", "prompt": { "source": "لا، شكراً" }, "solutions": ["No thank you", "No thanks"] }
+              ]
+            },
+            {
+              "kind": "lesson",
+              "exercises": [
+                { "kind": "multiple_choice", "prompt": { "source": "صباح الخير" }, "options": ["Good night", "Good morning", "Good evening"], "solutions": ["Good morning"] },
+                { "kind": "multiple_choice", "prompt": { "source": "مساء الخير" }, "options": ["Good evening", "Good morning", "Goodbye"], "solutions": ["Good evening"] },
+                { "kind": "word_bank", "prompt": { "source": "تصبح على خير" }, "tokens": ["Good", "night", "morning", "evening", "you"], "solutions": ["Good night"] },
+                { "kind": "word_bank", "prompt": { "source": "صباح الخير، سارة" }, "tokens": ["Good", "morning", "Sara", "night", "hello"], "solutions": ["Good morning Sara"] },
+                { "kind": "translate_to_en", "prompt": { "source": "مساء الخير" }, "solutions": ["Good evening"] },
+                { "kind": "translate_to_en", "prompt": { "source": "صباح الخير، شكراً" }, "solutions": ["Good morning thank you", "Good morning thanks"] }
+              ]
+            },
+            {
+              "kind": "lesson",
+              "exercises": [
+                { "kind": "multiple_choice", "prompt": { "source": "اسمي سارة" }, "options": ["My name is Sara", "Your name is Sara", "I am fine"], "solutions": ["My name is Sara"] },
+                { "kind": "word_bank", "prompt": { "source": "ما اسمك؟" }, "tokens": ["What", "is", "your", "name", "my", "are"], "solutions": ["What is your name", "What's your name"] },
+                { "kind": "word_bank", "prompt": { "source": "اسمي يوسف" }, "tokens": ["My", "name", "is", "Youssef", "your", "what"], "solutions": ["My name is Youssef"] },
+                { "kind": "multiple_choice", "prompt": { "source": "ما اسمك؟" }, "options": ["How are you?", "What is your name?", "Where are you?"], "solutions": ["What is your name?"] },
+                { "kind": "translate_to_en", "prompt": { "source": "مرحباً، اسمي سارة" }, "solutions": ["Hello my name is Sara", "Hi my name is Sara", "Hello I am Sara", "Hi I am Sara"] },
+                { "kind": "translate_to_en", "prompt": { "source": "ما اسمك؟" }, "solutions": ["What is your name", "What's your name"] }
+              ]
+            },
+            {
+              "kind": "lesson",
+              "exercises": [
+                { "kind": "multiple_choice", "prompt": { "source": "كيف حالك؟" }, "options": ["How are you?", "Who are you?", "What is your name?"], "solutions": ["How are you?"] },
+                { "kind": "word_bank", "prompt": { "source": "أنا بخير، شكراً" }, "tokens": ["I", "am", "fine", "thank", "you", "are", "good"], "solutions": ["I am fine thank you", "I'm fine thank you"] },
+                { "kind": "multiple_choice", "prompt": { "source": "أنا بخير" }, "options": ["I am fine", "You are fine", "I am Sara"], "solutions": ["I am fine"] },
+                { "kind": "word_bank", "prompt": { "source": "وأنت؟" }, "tokens": ["And", "you", "are", "I", "how"], "solutions": ["And you"] },
+                { "kind": "translate_to_en", "prompt": { "source": "كيف حالك يا سارة؟" }, "solutions": ["How are you Sara"] },
+                { "kind": "translate_to_en", "prompt": { "source": "أنا بخير، وأنت؟" }, "solutions": ["I am fine and you", "I'm fine and you", "I am good and you", "I'm good and you"] }
+              ]
+            },
+            {
+              "kind": "lesson",
+              "exercises": [
+                { "kind": "multiple_choice", "prompt": { "source": "تشرّفت بمعرفتك" }, "options": ["Nice to meet you", "See you tomorrow", "Good night"], "solutions": ["Nice to meet you"] },
+                { "kind": "word_bank", "prompt": { "source": "أراك غداً" }, "tokens": ["See", "you", "tomorrow", "good", "night"], "solutions": ["See you tomorrow"] },
+                { "kind": "multiple_choice", "prompt": { "source": "أراك غداً" }, "options": ["Goodbye", "See you tomorrow", "Good morning"], "solutions": ["See you tomorrow"] },
+                { "kind": "word_bank", "prompt": { "source": "مرحباً يوسف، تشرّفت بمعرفتك" }, "tokens": ["Hello", "Youssef", "nice", "to", "meet", "you", "see"], "solutions": ["Hello Youssef nice to meet you", "Hi Youssef nice to meet you"] },
+                { "kind": "translate_to_en", "prompt": { "source": "تشرّفت بمعرفتك" }, "solutions": ["Nice to meet you", "Pleased to meet you"] },
+                { "kind": "translate_to_en", "prompt": { "source": "مع السلامة، أراك غداً" }, "solutions": ["Goodbye see you tomorrow", "Bye see you tomorrow"] }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

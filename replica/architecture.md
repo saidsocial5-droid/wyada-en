@@ -1,6 +1,6 @@
 # WYADA EN: architecture
 
-Inputs: `replica/recon.md`, `replica/features.csv`. Schema: `replica/schema.sql` (first migration; tested on Postgres 16).
+Inputs: `replica/recon.md`, `replica/features.csv`. Schema: `supabase/migrations/` (first migration; tested on Postgres 16).
 
 Product: a gamified English course for **Arabic and French speakers**. Android first. The UI is in Arabic (RTL), French and English.
 
@@ -27,7 +27,7 @@ Product: a gamified English course for **Arabic and French speakers**. Android f
 
 ## 2. Schema summary
 
-33 tables in `replica/schema.sql`:
+33 tables in `supabase/migrations/`:
 
 - **Users**: profiles, push_tokens
 - **Content**: courses (`en-from-ar`, `en-from-fr`), sections, units, path_nodes, exercises, words, exercise_words
@@ -144,3 +144,11 @@ Goal: a guest picks Arabic → English, does one real lesson, sees XP and a stre
 
 ### M6: fixes
 - From the replica-entrepreneur review and beta analytics (F01 funnel drop-off, lesson completion rate, D1/D7 retention).
+
+## M1 status (done)
+
+- **Server**: `start_course` and `complete_lesson` are Postgres functions (RPC, `security definer`) rather than edge functions. One transaction, row locks, and they're testable on plain Postgres. Edge functions are still planned where outside APIs are needed (billing, AI, push).
+- **Content**: `content/en-from-ar/course.json` (unit 1, 5 lessons, 30 exercises) → `supabase/seed.sql`, validated by `content/build-seed.mjs`.
+- **App**: S01 welcome, S02 course choice, S08 path, S11/S12 lesson + feedback, S13 results. Demo mode (`app/src/backend/demo.ts`) runs the same rules on the device until Supabase keys are set.
+- **Tests**: server 15 checks on local Postgres 16; 6 unit tests (answer checking, XP and streak rules, time zones); a browser end-to-end test of the full loop in demo mode.
+- **Not yet verified**: the app against a live Supabase project (needs the project and its keys), and a real Android phone (fonts, RTL restart, TalkBack, the `URL` polyfill that supabase-js may need on Hermes).

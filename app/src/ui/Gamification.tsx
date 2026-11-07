@@ -27,7 +27,7 @@ export function StatsHeader({ streak, gems, energy, infinite, streakToday }: { s
 }
 
 /* ---------- UnitBanner ---------- */
-export function UnitBanner({ n, section }: { n: number; section: number }) {
+export function UnitBanner({ n, section, title }: { n: number; section: number; title?: string }) {
   const { t } = useTheme();
   const [fill, on] = unitColors[`unit-${((n - 1) % 6) + 1}` as keyof typeof unitColors];
   return (
@@ -35,7 +35,7 @@ export function UnitBanner({ n, section }: { n: number; section: number }) {
       backgroundColor: fill, borderBottomWidth: depth['edge-md'], borderBottomColor: '#00000033' }}>
       <View style={{ flex: 1, gap: space[1] }}>
         <Text size="sm" weight={600} color={on} style={{ opacity: 0.85 }}>{`${t('unit')} ${section} · ${n}`}</Text>
-        <Text size="lg" weight={700} color={on}>{t('unitTitle')}</Text>
+        <Text size="lg" weight={700} color={on}>{title ?? t('unitTitle')}</Text>
       </View>
       <Pressable accessibilityRole="button" accessibilityLabel={t('guidebook')}
         style={{ minWidth: 48, minHeight: 48, borderRadius: radius.md, borderWidth: 2, borderColor: '#FFFFFF66', alignItems: 'center', justifyContent: 'center' }}>
@@ -48,7 +48,7 @@ export function UnitBanner({ n, section }: { n: number; section: number }) {
 export type NodeKind = 'lesson' | 'story' | 'review' | 'chest' | 'unit_test' | 'roleplay';
 export type NodeState = 'locked' | 'current' | 'in_progress' | 'done' | 'legendary';
 const kindIcon = { lesson: Star, story: BookOpen, review: Dumbbell, chest: Gift, unit_test: Trophy, roleplay: MessageCircle };
-export function PathNode({ kind, state, progress = 0, unit = 1, label }: { kind: NodeKind; state: NodeState; progress?: number; unit?: number; label?: string }) {
+export function PathNode({ kind, state, progress = 0, unit = 1, label, onPress, testID }: { kind: NodeKind; state: NodeState; progress?: number; unit?: number; label?: string; onPress?: () => void; testID?: string }) {
   const { c } = useTheme();
   const [fill, on] = unitColors[`unit-${((unit - 1) % 6) + 1}` as keyof typeof unitColors];
   const Icon = state === 'done' && kind === 'lesson' ? Check : state === 'legendary' ? Crown : kind === 'roleplay' ? MessageCircle : kindIcon[kind];
@@ -66,7 +66,7 @@ export function PathNode({ kind, state, progress = 0, unit = 1, label }: { kind:
         borderWidth: state === 'in_progress' || state === 'current' ? 6 : 0, borderColor: state === 'in_progress' ? c.border : state === 'current' ? c['accent-soft'] : 'transparent',
         borderTopColor: state === 'in_progress' && progress > 0 ? fill : undefined, borderRightColor: state === 'in_progress' && progress > 0.25 ? fill : undefined,
         borderBottomColor: state === 'in_progress' && progress > 0.5 ? fill : undefined, borderLeftColor: state === 'in_progress' && progress > 0.75 ? fill : undefined }}>
-        <Pressable accessibilityRole="button" accessibilityLabel={`${label ?? kind}, ${state}`} accessibilityState={{ disabled: state === 'locked' }}
+        <Pressable testID={testID} onPress={state === 'locked' ? undefined : onPress} accessibilityRole="button" accessibilityLabel={`${label ?? kind}, ${state}`} accessibilityState={{ disabled: state === 'locked' }}
           style={({ pressed }) => ({ width: d, height: d - 6, borderRadius: radius.pill, backgroundColor: bg, alignItems: 'center', justifyContent: 'center',
             borderBottomWidth: pressed ? 0 : 6, borderBottomColor: '#00000038', transform: [{ translateY: pressed ? 6 : 0 }] })}>
           {state === 'locked' ? <Lock color={fg} size={28} /> : <Icon color={fg} size={30} fill={kind === 'lesson' && state !== 'done' ? fg : 'transparent'} />}

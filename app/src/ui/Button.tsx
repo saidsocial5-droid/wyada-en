@@ -18,10 +18,10 @@ const look: Record<ButtonVariant, { bg: ColorRole; edge: ColorRole; fg: ColorRol
 };
 
 type Props = { label: string; onPress?: () => void; variant?: ButtonVariant; size?: keyof typeof sizes;
-  disabled?: boolean; loading?: boolean; icon?: ReactNode; full?: boolean };
+  disabled?: boolean; loading?: boolean; icon?: ReactNode; full?: boolean; testID?: string };
 
 /** Chunky pressable: a solid bottom edge that sinks on press. Min height 40, md/lg meet the 48px target. */
-export function Button({ label, onPress, variant = 'primary', size = 'md', disabled, loading, icon, full = true }: Props) {
+export function Button({ label, onPress, variant = 'primary', size = 'md', disabled, loading, icon, full = true, testID }: Props) {
   const { c, t } = useTheme();
   const s = sizes[size];
   const v = look[variant];
@@ -31,6 +31,7 @@ export function Button({ label, onPress, variant = 'primary', size = 'md', disab
   const fg = disabled ? c['text-disabled'] : c[v.fg];
   return (
     <Pressable
+      testID={testID}
       accessibilityRole="button"
       accessibilityLabel={loading ? `${label}, ${t('loading')}` : label}
       accessibilityState={{ disabled: !!off, busy: !!loading }}

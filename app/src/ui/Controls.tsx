@@ -13,12 +13,12 @@ const optionLook: Record<OptionState, { bg: ColorRole; border: ColorRole; fg: Co
   wrong: { bg: 'danger-soft', border: 'danger', fg: 'on-danger-soft' },
   disabled: { bg: 'surface-sunken', border: 'border', fg: 'text-disabled' },
 };
-export function OptionCard({ label, hint, state = 'idle', onPress, latin, index }:
-  { label: string; hint?: string; state?: OptionState; onPress?: () => void; latin?: boolean; index?: number }) {
+export function OptionCard({ label, hint, state = 'idle', onPress, latin, index, testID }:
+  { label: string; hint?: string; state?: OptionState; onPress?: () => void; latin?: boolean; index?: number; testID?: string }) {
   const { c } = useTheme();
   const l = optionLook[state];
   return (
-    <Pressable accessibilityRole="radio" accessibilityState={{ checked: state === 'selected', disabled: state === 'disabled' }}
+    <Pressable testID={testID} accessibilityRole="radio" accessibilityLabel={hint ? `${label}, ${hint}` : label} accessibilityState={{ checked: state === 'selected', disabled: state === 'disabled' }}
       disabled={state === 'disabled'} onPress={onPress}
       style={({ pressed }) => ({ flexDirection: 'row', alignItems: 'center', gap: space[3], minHeight: 56, padding: space[3],
         borderRadius: radius.lg, borderWidth: 2, borderBottomWidth: pressed ? 2 : 2 + depth['edge-sm'],
@@ -39,14 +39,14 @@ export function OptionCard({ label, hint, state = 'idle', onPress, latin, index 
 
 /* ---------- WordChip: word bank tokens (always English, LTR) ---------- */
 export type ChipState = 'bank' | 'placed' | 'used' | 'hint';
-export function WordChip({ word, state = 'bank', onPress }: { word: string; state?: ChipState; onPress?: () => void }) {
+export function WordChip({ word, state = 'bank', onPress, testID }: { word: string; state?: ChipState; onPress?: () => void; testID?: string }) {
   const { c } = useTheme();
   if (state === 'used') // keeps its slot so the bank doesn't jump
     return <View accessibilityElementsHidden style={{ paddingHorizontal: space[3], height: 44, borderRadius: radius.md, backgroundColor: c['surface-sunken'] }}>
       <Text latin style={{ opacity: 0, lineHeight: 44 }}>{word}</Text></View>;
   const hint = state === 'hint';
   return (
-    <Pressable accessibilityRole="button" accessibilityLabel={word} onPress={onPress}
+    <Pressable testID={testID} accessibilityRole="button" accessibilityLabel={word} onPress={onPress}
       style={({ pressed }) => ({ paddingHorizontal: space[3], height: 44, justifyContent: 'center', borderRadius: radius.md,
         backgroundColor: hint ? c['accent-soft'] : c.surface, borderWidth: 2, borderColor: hint ? c.accent : c.border,
         borderBottomWidth: pressed ? 2 : 2 + depth['edge-sm'], transform: [{ translateY: pressed ? depth['edge-sm'] : 0 }] })}>
@@ -56,14 +56,17 @@ export function WordChip({ word, state = 'bank', onPress }: { word: string; stat
 }
 
 /* ---------- TextField: typed answers ---------- */
-export function TextField({ placeholder, error, value: initial = '' }: { placeholder: string; error?: string; value?: string }) {
+export function TextField({ placeholder, error, value: controlled, onChangeText, editable = true, testID }:
+  { placeholder: string; error?: string; value?: string; onChangeText?: (v: string) => void; editable?: boolean; testID?: string }) {
   const { c } = useTheme();
-  const [value, setValue] = useState(initial);
+  const [own, setOwn] = useState(controlled ?? '');
+  const value = onChangeText ? controlled ?? '' : own;
+  const setValue = onChangeText ?? setOwn;
   const [focus, setFocus] = useState(false);
   const border = error ? c.danger : focus ? c['focus-ring'] : c['border-input'];
   return (
     <View style={{ gap: space[1] }}>
-      <TextInput value={value} onChangeText={setValue} placeholder={placeholder} placeholderTextColor={c['text-muted']}
+      <TextInput testID={testID} editable={editable} value={value} onChangeText={setValue} placeholder={placeholder} placeholderTextColor={c['text-muted']}
         accessibilityLabel={placeholder} accessibilityHint={error} autoCapitalize="sentences" autoCorrect={false}
         multiline onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}
         style={[font('lg', 400), { minHeight: 120, padding: space[4], borderRadius: radius.lg, borderWidth: focus || error ? 2 : 1.5,

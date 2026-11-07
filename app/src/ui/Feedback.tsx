@@ -6,7 +6,7 @@ import { Button } from './Button';
 
 /* ---------- FeedbackSheet: after Check ---------- */
 export type FeedbackKind = 'correct' | 'wrong' | 'typo';
-export function FeedbackSheet({ kind, answer }: { kind: FeedbackKind; answer?: string }) {
+export function FeedbackSheet({ kind, answer, onContinue, showExplain = true }: { kind: FeedbackKind; answer?: string; onContinue?: () => void; showExplain?: boolean }) {
   const { c, t } = useTheme();
   const good = kind !== 'wrong';
   const bg: ColorRole = good ? 'success-soft' : 'danger-soft';
@@ -22,11 +22,11 @@ export function FeedbackSheet({ kind, answer }: { kind: FeedbackKind; answer?: s
           <Flag color={c[fg]} size={20} /></Pressable>
       </View>
       {answer ? <Text size="lg" color={fg} latin>{answer}</Text> : null}
-      {kind !== 'correct' && (
+      {kind !== 'correct' && showExplain && (
         <Pressable accessibilityRole="button" style={{ flexDirection: 'row', alignItems: 'center', gap: space[2], minHeight: 44 }}>
           <Sparkles color={c[fg]} size={18} /><Text weight={600} color={fg} style={{ textDecorationLine: 'underline' }}>{t('explain')}</Text>
         </Pressable>)}
-      <Button label={t('continue')} variant={good ? 'success' : 'danger'} />
+      <Button testID="feedback-continue" label={t('continue')} variant={good ? 'success' : 'danger'} onPress={onContinue} />
     </View>
   );
 }
@@ -79,6 +79,23 @@ export function BottomNav({ active = 'learn', badge }: { active?: (typeof tabs)[
             </View>
           </Pressable>);
       })}
+    </View>
+  );
+}
+
+/* ---------- ConfirmDialog ---------- */
+export function ConfirmDialog({ visible, title, body, confirm, cancel, onConfirm, onCancel, destructive }:
+  { visible: boolean; title: string; body?: string; confirm: string; cancel: string; onConfirm: () => void; onCancel: () => void; destructive?: boolean }) {
+  const { c } = useTheme();
+  if (!visible) return null;
+  return (
+    <View accessibilityViewIsModal style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0, backgroundColor: c.scrim, justifyContent: 'flex-end' }}>
+      <View style={{ backgroundColor: c.surface, padding: space[6], gap: space[3], borderTopLeftRadius: radius.xl, borderTopRightRadius: radius.xl }}>
+        <Text size="xl" weight={700} center accessibilityRole="header">{title}</Text>
+        {body ? <Text color="text-muted" center>{body}</Text> : null}
+        <Button testID="dialog-cancel" label={cancel} onPress={onCancel} />
+        <Button testID="dialog-confirm" label={confirm} variant={destructive ? 'ghost' : 'secondary'} onPress={onConfirm} />
+      </View>
     </View>
   );
 }

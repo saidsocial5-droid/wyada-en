@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from 'react';
 import { useColorScheme } from 'react-native';
+import { getLocales } from 'expo-localization';
 import { palettes, type, type Palette } from './tokens';
 import { strings, type Lang } from '../i18n/strings';
 
@@ -15,7 +16,10 @@ const ThemeCtx = createContext<Ctx | null>(null);
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const system = useColorScheme() === 'dark' ? 'dark' : 'light';
   const [scheme, setScheme] = useState<Scheme>(system);
-  const [lang, setLang] = useState<Lang>('ar');
+  const [lang, setLang] = useState<Lang>(() => {
+    const code = getLocales()[0]?.languageCode;
+    return code === 'fr' || code === 'en' ? code : 'ar'; // Arabic is the default audience
+  });
   const value = useMemo<Ctx>(() => ({
     c: palettes[scheme] as Palette, scheme, setScheme, lang, setLang, rtl: lang === 'ar',
     t: (k) => strings[lang][k] ?? strings.en[k],
